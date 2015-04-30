@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+	Created by ApplusForm.com on 2013.8.6
+
+	Permission is granted to copy, distribute, modify under the terms of ApplusForm License.
+
+	Copyright (C) 2014 ApplusForm.com. All rights reserved.
+-->
+<MOML version="1.1.5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.applusform.com/xsd/moml_ui_1.1.5.xsd">
+	<FUNCTION id="goDetail">
+		<CMD cmd="userVariable.basketData = db.result.getXmlData" />
+		<CMD cmd="action:go('root.start_navigationContainer.main.mainNavigation','basketDetail')" />
+	</FUNCTION>
+
+	<FUNCTION id="go_delect(index)">
+		<CMD cmd="device.systemPopup('', '관심상품에서 삭제 하시겠습니까?', '삭제:function.goDelect('+index+')', '취소','')" />
+	</FUNCTION>
+
+	<FUNCTION id="goDelect(index)"> 
+		<CMD cmd="db.exec('DELETE FROM shopping WHERE _id='+index+'')" />
+		<CMD cmd="function.load" />
+	</FUNCTION>
+
+	<FUNCTION id="load">
+		<CMD cmd="db.exec('SELECT * FROM shopping ORDER BY _id DESC')" />
+		<CMD cmd="basketList.dataSource= db.result.getXmlData " />
+		<CMD cmd="root.start_navigationContainer.main.mainBackBtn.visible='invisible'" />
+	</FUNCTION>
+	<UILAYOUT portrait="720,1170">
+		<WINDOW layout="10,0,700,1170" align="relative" onShow="function.load">
+			<LIST id="basketList" layout="0,0,700,1170" dataSource="" dataList="/DATA/ROW" divider="#80b0ac9f">
+				<LISTLAYOUT>
+					<WINDOW layout="0,0,700,250" align="relative">
+						<IMAGE id="model" layout="25,20,210,210" defaultImg="{xpath.evaluate('./@imagepath')}" />
+						<LABEL layout="250,36,200,100" themeId="themeFontFace" text="{xpath.evaluate('./@title')}" fontSize="50" textColor="#ffffff" fontStyle="bold" />
+						<LABEL layout="250,130,200,60" themeId="themeFontFace" text="{xpath.evaluate('./@subtitle') +' 원'}" fontSize="40" textColor="#a0a0a0" fontStyle="bold" />
+					</WINDOW>
+					<BUTTON layout="0,0,700,250" themeId="themeListClickColor" onLongClick="{function.go_delect(xpath.evaluate('./@_id'))}"
+						onClick="userVariable.imagePosition = math.add(xpath.position(),1), userVariable.imageDetailTitle =xpath.evaluate('./@title'),userVariable.imageDetailSub = xpath.evaluate('./@subtitle'),userVariable.imageDetailUrl = xpath.evaluate('./@imagepath'), function.goDetail" />
+				</LISTLAYOUT>
+			</LIST>
+		</WINDOW>
+	</UILAYOUT>
+</MOML>
+
+					
+	
+
+					

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	Created by ApplusForm.com on 2013.8.6
+
+	Permission is granted to copy, distribute, modify under the terms of ApplusForm License.
+
+	Copyright (C) 2014 ApplusForm.com. All rights reserved.
+-->
+<MOML version="1.1.5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.applusform.com/xsd/moml_ui_1.1.5.xsd">
+	<FUNCTION id="go_dbInit">
+		<CMD cmd="db.exec('CREATE TABLE IF NOT EXISTS shopping( _id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL, subtitle TEXT NOT NULL, imagepath TEXT NOT NULL, url TEXT NOT NULL)')" />
+		<CMD cmd="db.exec('SELECT * FROM shopping')" />
+		<CMD cmd="userVariable.shoppingData = db.result.getXmlData()" />
+		<CMD cmd="userVariable.bestURL  = 'http://socialportal.co.kr/socialxml.php&amp;mid=ticketmonster&amp;id=crazysale'" />
+		<CMD cmd="userVariable.informationURL  = 'http://www.lalalady.co.kr/front/php/b/board_list.php&amp;board_no=7'" />
+	</FUNCTION>
+
+	<FUNCTION id="refresh">
+		<CMD cmd="device.systemPopup('','포인트 충전이 완료 되었습니다.', '확인:function.pointChargeSuccess', '','')" />
+	</FUNCTION>
+
+	<FUNCTION id="pointChargeSuccess">
+		<CMD cmd="action:back('root.start_navigationContainer.main.mainNavigation')" />
+	</FUNCTION>
+
+	<FUNCTION id="back">
+		<CMD cmd="action:back('root.start_navigationContainer.main.mainNavigation')" />
+	</FUNCTION>
+
+	<CMD cmd="userVariable.topTitle = '패션'" />
+	<CMD cmd="function.go_dbInit" />
+	<UILAYOUT portrait="720,1280">
+		<NAVIGATIONCONTAINER id="start_navigationContainer" layout="0,0,720,1280" selectedItem="intro">
+			<VIEWITEM id="intro" src="intro.xml" transitionInEffect="mosaic:random" transitionOutEffect="mosaic:random" />
+			<VIEWITEM id="main" src="main.xml" transitionInEffect="mosaic:random" transitionOutEffect="mosaic:random" />
+		</NAVIGATIONCONTAINER>
+	</UILAYOUT>
+</MOML>
+
+ 

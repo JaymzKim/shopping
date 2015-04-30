@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+	Created by ApplusForm.com on 2013.8.6
+
+	Permission is granted to copy, distribute, modify under the terms of ApplusForm License.
+
+	Copyright (C) 2014 ApplusForm.com. All rights reserved.
+-->
+<MOML version="1.1.5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.applusform.com/xsd/moml_ui_1.1.5.xsd">
+	<THEMES id="themeMain">
+		<THEME id="themeLabelText" fontSize="130" textColor="#a7a5a9" fontFace="../res/font/drfont_daraehand_Basic.ttf" fontStyle="bold" textAlign="center" />
+	</THEMES>
+	<FUNCTION id="ani">
+		<CMD cmd="animation.flyIn('dateWindow', 720,0,720,300,'bounce',1000,'function.dateLabelAni')" />
+	</FUNCTION>
+
+	<FUNCTION id="dateLabelAni">
+		<CMD cmd="animation.show('dateLabel', 'fade', 'roundTrip', 1000, 'function.logoAni')" />
+	</FUNCTION>
+
+	<FUNCTION id="logoAni">
+		<CMD cmd="animation.show('logoWindow', 'fade', '', 1000, 'function.goMain')" />
+	</FUNCTION>
+
+	<FUNCTION id="goMain">
+		<CMD cmd="action:go('root.start_navigationContainer','main')" />
+	</FUNCTION>
+	<CMD cmd="function.ani" />
+	<UILAYOUT portrait="720,1280" theme="themeMain">
+		<WINDOW layout="0,0,720,1280" align="relative" defaultImg="/res/introBg.png" onClick="action:go('root.start_navigationContainer','main')">
+			<WINDOW id="logoWindow" layout="20,290,680,400" align="linear:vertical" visible="invisible">
+				<LABEL layout="720,200" themeId="themeLabelText" text="LALA LADY" textColor="#ffffff" />
+				<LABEL layout="720,200" themeId="themeLabelText" text="라라 레이디" textColor="#ffffff" />
+			</WINDOW>
+			<WINDOW id="dateWindow" layout="0,800,720,300" defaultImg="#90ffffff" align="linear:horizontal">
+				<LABEL id="dateLabel" layout="720,300" themeId="themeLabelText" text="{date.getFormatDate(date.now, 'yyyy-MM-dd HH 시 mm 분')}" textColor="#ffffff" fontSize="50" visible="invisible" />
+			</WINDOW>
+		</WINDOW>
+	</UILAYOUT>
+</MOML>

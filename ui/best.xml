@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+	Created by ApplusForm.com on 2013.8.6
+
+	Permission is granted to copy, distribute, modify under the terms of ApplusForm License.
+
+	Copyright (C) 2014 ApplusForm.com. All rights reserved.
+-->
+<MOML version="1.1.5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.applusform.com/xsd/moml_ui_1.1.5.xsd">
+	<THEMES id="bestTheme">
+		<THEME id="themeListName" fontFace="embed:/moml/res/font/drfont_daraehand_Basic.ttf" fontSize="35" textColor="#a7a5a9" fontStyle="bold" />
+		<THEME id="themeListWon" fontFace="embed:/moml/res/font/drfont_daraehand_Basic.ttf" fontSize="40" textColor="#ff0080" fontStyle="bold" />
+		<THEME id="themeListRangKing" fontFace="embed:/moml/res/font/drfont_daraehand_Basic.ttf" fontSize="90" textColor="#ff0000" fontStyle="bold" textAlign="center" />
+	</THEMES>
+
+	<FUNCTION id="goDetail"><!-- 상세정보 화면 이동 -->
+		<CMD cmd="userVariable.dataSorcePath = '/remoteData/bestListData.xml'" />
+		<CMD cmd="action:go('root.start_navigationContainer.main.mainNavigation','detail')" />
+	</FUNCTION>
+
+	<UILAYOUT portrait="720,1170" theme="bestTheme">
+		<WINDOW layout="10,0,700,1170" align="relative" onShow="root.start_navigationContainer.main.mainBackBtn.visible='invisible'">
+			<LIST id="bestList" layout="0,0,700,1170" dataSource="{xmlProcessing.groupByOrder('/remoteData/bestListData.xml', '/DATA/ITEMLIST/ITEM', 2, 'ITEMGROUP')}" dataList="/DATA/ITEMLIST/ITEMGROUP"
+				divider="#80b0ac9f">
+				<LISTLAYOUT condition="xpath.evaluate('count(./ITEM)') == '2'">
+					<WINDOW id="scrollWin" layout="0,0,700,700" align="relative">
+						<WINDOW layout="10,0,330,700" align="relative" defaultImg="embed:/moml/res/plan_list_shadow.png">
+							<IMAGE id="model" layout="10,10,310,540" defaultImg="{xpath.evaluate('./ITEM[1]/IMAGE/text()')}" />
+							<LABEL layout="10,560,200,60" themeId="themeListName" text="{xpath.evaluate('./ITEM[1]/NAME/text()')}" />
+							<LABEL layout="10,620,200,60" themeId="themeListWon" text="{xpath.evaluate('./ITEM[1]/WON/text()') + ' 원'}" />
+							<LABEL layout="205,560,110,110" themeId="themeListRangKing" text="{xpath.evaluate('./ITEM[1]/RANGKING/text()')}" />
+						</WINDOW>
+						<WINDOW layout="350,0,330,700" align="relative" defaultImg="embed:/moml/res/plan_list_shadow.png">
+							<IMAGE layout="10,10,310,540" defaultImg="{xpath.evaluate('./ITEM[2]/IMAGE/text()')}" />
+							<LABEL layout="10,560,200,60" themeId="themeListName" text="{xpath.evaluate('./ITEM[2]/NAME/text()')}" />
+							<LABEL layout="10,620,200,60" themeId="themeListWon" text="{xpath.evaluate('./ITEM[2]/WON/text()') + ' 원'}" />
+							<LABEL layout="205,560,110,110" themeId="themeListRangKing" text="{xpath.evaluate('./ITEM[2]/RANGKING/text()')}" />
+						</WINDOW>
+						<BUTTON layout="10,0,330,690" themeId="themeListClickColor"
+							onClick="userVariable.imagePosition = xpath.evaluate('./ITEM[1]/POSITION/text()'), userVariable.imageDetailTitle =xpath.evaluate('./ITEM[1]/NAME/text()'),userVariable.imageDetailSub = xpath.evaluate('./ITEM[1]/WON/text()'),userVariable.imageDetailUrl = xpath.evaluate('./ITEM[1]/IMAGE/text()'), function.goDetail" />
+						<BUTTON layout="350,0,330,690" themeId="themeListClickColor"
+							onClick="userVariable.imagePosition = xpath.evaluate('./ITEM[2]/POSITION/text()'), userVariable.imageDetailTitle =xpath.evaluate('./ITEM[2]/NAME/text()'),userVariable.imageDetailSub = xpath.evaluate('./ITEM[2]/WON/text()'),userVariable.imageDetailUrl = xpath.evaluate('./ITEM[2]/IMAGE/text()'), function.goDetail" />
+					</WINDOW>
+				</LISTLAYOUT>
+				<LISTLAYOUT condition="xpath.evaluate('count(./ITEM)') == '1'">
+					<WINDOW layout="0,0,700,700" align="relative">
+						<WINDOW layout="10,0,330,700" align="relative" defaultImg="embed:/moml/res/plan_list_shadow.png">
+							<IMAGE layout="10,10,310,540" defaultImg="{xpath.evaluate('./ITEM[1]/IMAGE/text()')}" />
+							<LABEL layout="10,560,200,60" themeId="themeListName" text="{xpath.evaluate('./ITEM[1]/NAME/text()')}" />
+							<LABEL layout="10,620,200,60" themeId="themeListWon" text="{xpath.evaluate('./ITEM[1]/WON/text()')+ ' 원'}" />
+							<LABEL layout="205,560,110,110" themeId="themeListRangKing" text="{xpath.evaluate('./ITEM[1]/RANGKING/text()')}" />
+						</WINDOW>
+						<BUTTON layout="10,0,330,690" themeId="themeListClickColor"
+							onClick="userVariable.imagePosition = xpath.evaluate('./ITEM[1]/POSITION/text()'), userVariable.imageDetailTitle =xpath.evaluate('./ITEM[1]/NAME/text()'),userVariable.imageDetailSub = xpath.evaluate('./ITEM[1]/WON/text()'),userVariable.imageDetailUrl = xpath.evaluate('./ITEM[1]/IMAGE/text()'), function.goDetail" />
+					</WINDOW>
+				</LISTLAYOUT>
+			</LIST>
+		</WINDOW>
+	</UILAYOUT>
+</MOML>
+
+					
+	
+
+					

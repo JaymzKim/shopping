@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DATA>
+    <ITEMLIST>
+        <ITEM>
+            <POSITION>1</POSITION>
+            <NAME>지방시 카라</NAME>
+            <SUB>★SALE★ 핫핑크~지방시 카라 원피스형 쉬폰 블라우스</SUB>
+	    	<IMAGE>/remoteData/image/sale/image1.png</IMAGE>
+	    	<WON>32000</WON>
+	    	<SALE>59%</SALE>
+	    	<SALEWON>19000</SALEWON>
+	    	<URL>http://m.lalalady.co.kr/mobile/Prd/View.php?product_no=537</URL>
+        </ITEM>
+        <ITEM>
+            <POSITION>2</POSITION>
+            <NAME>카라 구두</NAME>
+            <SUB>★SALE★ L** 카라 구두 원피스/SBS 이윤아 아나 협찬</SUB>
+	    	<IMAGE>/remoteData/image/sale/image2.png</IMAGE>
+	    	<WON>49000</WON>
+	    	<SALE>51%</SALE>
+	    	<SALEWON>25000</SALEWON>
+	    	<URL>http://m.lalalady.co.kr/mobile/Prd/View.php?product_no=525</URL>
+        </ITEM>
+        <ITEM>
+            <POSITION>3</POSITION>
+            <NAME>페이즐리 카라</NAME>
+            <SUB>G**청데님 페이즐리 카라 원피스/SBS 이윤아 아나 협찬</SUB>
+	    	<IMAGE>/remoteData/image/sale/image3.png</IMAGE>
+	    	<WON>79000</WON>
+	    	<SALE>62%</SALE>
+	    	<SALEWON>49000</SALEWON>
+	    	<URL>http://m.lalalady.co.kr/mobile/Prd/View.php?product_no=551</URL>
+        </ITEM>
+        <ITEM>
+            <POSITION>4</POSITION>
+            <NAME>벨티드 원피스</NAME>
+            <SUB>P**에메랄드 벨티드 원피스/민소매 민트 원피스/노란색 원피스</SUB>
+	    	<IMAGE>/remoteData/image/sale/image4.png</IMAGE>
+	    	<WON>76000</WON>
+	    	<SALE>59%</SALE>
+	    	<SALEWON>45000</SALEWON>
+	    	<URL>http://m.lalalady.co.kr/mobile/Prd/View.php?product_no=420</URL>
+        </ITEM>
+	</ITEMLIST>
+</DATA>
+
+

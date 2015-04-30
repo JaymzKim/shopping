@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+	Created by ApplusForm.com on 2013.8.6
+
+	Permission is granted to copy, distribute, modify under the terms of ApplusForm License.
+
+	Copyright (C) 2014 ApplusForm.com. All rights reserved.
+-->
+<MOML version="1.1.5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.applusform.com/xsd/moml_ui_1.1.5.xsd">
+	<FUNCTION id="goNextCheck">
+		<CMD cmd="userVariable.totalpage = xpath.evaluateEx('namespace', 'count(/DATA/ITEMLIST/ITEM)')" />
+		<CMD condition="math.num(userVariable.imagePosition) &lt; math.num(userVariable.totalpage)" cmd="userVariable.imagePosition = math.add(userVariable.imagePosition, 1), function.goNext" elseCmd="device.toastPopup('마지막 상품 입니다.')" />
+	</FUNCTION>
+
+	<FUNCTION id="goNext">
+		<CMD cmd="animation.hide('detailTitle', 'fade', '', 500, '')" />
+		<CMD cmd="animation.hide('detailSub', 'fade', '', 500, '')" />
+		<CMD cmd="animation.hide('detailWon', 'fade', '', 500, '')" />
+		<CMD cmd="animation.hide('detailBtn', 'fade', '', 500, '')" />
+		<CMD cmd="animation.hide('basketBtn', 'fade', '', 500, '')" />
+		<CMD cmd="animation.hide('cameraBtn', 'fade', '', 500, '')" />
+		<CMD cmd="animation.hide('buyBtn', 'fade', '', 500, '')" />
+		<CMD cmd="animation.hide('imageDetail', 'fade', '', 500, 'function.detailChage')" />
+	</FUNCTION>
+
+	<FUNCTION id="goPrev">
+		<CMD condition="math.num(userVariable.imagePosition) &gt; 1"
+			cmd="userVariable.imagePosition = math.sub(userVariable.imagePosition, 1),animation.hide('detailTitle', 'fade', '', 500, ''), animation.hide('detailSub', 'fade', '', 500, ''),animation.hide('detailWon', 'fade', '', 500, ''), animation.hide('detailBtn', 'fade', '', 500, ''),animation.hide('buyBtn', 'fade', '', 500, ''),animation.hide('imageDetail', 'fade', '', 500, 'function.detailChage')"
+			elseCmd="device.toastPopup('첫번쨰 상품 입니다.')" />
+	</FUNCTION>
+
+	<FUNCTION id="detailChage"><!-- 좌우 Flick 후 상세정보 화면 설정 -->
+		<CMD cmd="detailTitle.text = xpath.evaluateEx('namespace', 'DATA/ITEMLIST/ITEM['+userVariable.imagePosition+']/NAME/text()')" />
+		<CMD cmd="detailSub.text = xpath.evaluateEx('namespace', 'DATA/ITEMLIST/ITEM['+userVariable.imagePosition+']/WON/text()')" />
+		<CMD cmd="imageDetail.defaultImg = xpath.evaluateEx('namespace', 'DATA/ITEMLIST/ITEM['+userVariable.imagePosition+']/IMAGE/text()')" />
+		<CMD cmd="animation.flyIn('detailTitle', 1400,0,200,80,'bounce',500,'')" />
+		<CMD cmd="animation.flyIn('detailSub', 1400,0,200,80,'bounce',500,'')" />
+		<CMD cmd="animation.flyIn('detailWon', 1400,0,200,80,'bounce',500,'')" />
+		<CMD cmd="animation.flyIn('detailBtn', 1000,0,150,150,'bounce',500,'')" />
+		<CMD cmd="animation.flyIn('buyBtn', 1000,0,150,150,'bounce',500,'')" />
+		<CMD cmd="animation.show('basketBtn', 'fade', '', 500, '')" />
+		<CMD cmd="animation.show('cameraBtn', 'fade', '', 500, '')" />
+		<CMD cmd="animation.show('imageDetail', 'fade', '', 500, '')" />
+	</FUNCTION>
+
+	<FUNCTION id="startAni">
+		<CMD cmd="animation.hide('menuPopup', 'fade', '', 1000, '')" delay="1000" />
+	</FUNCTION>
+
+	<FUNCTION id="goDetail(value)"><!-- 상세보기 웹사이트 이동 -->
+		<CMD cmd="userVariable.webSiteUrl = value" />
+		<CMD cmd="action:go('root.start_navigationContainer.main.mainNavigation','webSite')" />
+	</FUNCTION>
+
+	<FUNCTION id="goCamera">
+		<CMD cmd="action:go('root.start_navigationContainer.main.mainNavigation','camera')" />
+	</FUNCTION>
+
+	<FUNCTION id="buy">
+		<CMD cmd="action:go('root.start_navigationContainer.main.mainNavigation','buy')" />
+	</FUNCTION>
+
+	<FUNCTION id="basketAdd(url)">
+		<CMD cmd="db.exec('SELECT COUNT(*) FROM shopping WHERE title=\''+detailTitle.text+'\'')" />
+		<CMD cmd="userVariable.dbUrl = url" />
+		<CMD condition="'0' == db.result.data(0,0)" cmd="device.systemPopup('알림', '관심상품에 추가하시겠습니까?', '확인:function.basketSave', '취소','')" elseCmd="function.dbInsertFall" />
+	</FUNCTION>
+
+	<FUNCTION id="basketSave"><!-- 장바구니 담기 -->
+		<CMD cmd="userVariable.listTitle = detailTitle.text" />
+		<CMD cmd="userVariable.subTitle = detailSub.text" />
+		<CMD cmd="userVariable.imagePath = imageDetail.defaultImg" />
+		<CMD cmd="function.dbDataCheck" />
+	</FUNCTION>
+
+	<FUNCTION id="dbDataCheck"><!-- 선택된 상품 DB 에 존재 여부 체크 -->
+		<CMD cmd="db.exec('SELECT COUNT(*) FROM shopping WHERE title=\''+userVariable.listTitle+'\'')" />
+		<CMD condition="'0' == db.result.data(0,0)" cmd="function.dbInsert" elseCmd="function.dbInsertFall" />
+		<CMD cmd="db.exec('SELECT * FROM shopping')" />
+		<CMD cmd="userVariable.shoppingData = db.result.getXmlData()" />
+	</FUNCTION>
+
+	<FUNCTION id="dbInsert"><!-- 선택된 상품 DB 에 추가 -->
+		<CMD
+			cmd="db.exec('INSERT INTO shopping VALUES(null,
+									 \''+userVariable.listTitle+'\' , 
+									 \''+userVariable.subTitle+'\' ,
+									 \''+userVariable.imagePath+'\',
+									 \''+userVariable.dbUrl+'\'
+									  )')" />
+		<CMD cmd="device.toastPopup('등록 되었습니다.')" />
+	</FUNCTION>
+
+	<FUNCTION id="dbInsertFall"><!-- 선택된 상품 DB 에 존재할 경우 팝업 -->
+		<CMD cmd="device.toastPopup('이미 등록되어 있습니다.')" />
+	</FUNCTION>
+
+	<DATASOURCE id="namespace" src="{userVariable.dataSorcePath}" />
+	<CMD cmd="root.start_navigationContainer.main.mainBackBtn.visible='visible'" />
+	<UILAYOUT portrait="720,1170">
+		<WINDOW layout="0,0,720,1170" align="relative" onShow="function.startAni" onFlickRight="{function.goPrev}" onFlickLeft="{function.goNextCheck}">
+			<IMAGE id="imageDetail" layout="10,10,700,990" defaultImg="{userVariable.imageDetailUrl}" />
+			<WINDOW layout="0,1010,720,160" align="relative" defaultImg="embed:/moml/res/detail_footer_bg.png">
+				<LABEL id="detailTitle" themeId="themeFontFace" layout="30,26,520,70" text="{userVariable.imageDetailTitle}" fontSize="40" minFontSize="0" ellipsis="end" multiLine="false" textColor="#000000"
+					fontStyle="bold" textAlign="vCenter" margin="10,50,0,0" />
+				<LABEL id="detailSub" themeId="themeFontFace" layout="30,80,200,80" text="{userVariable.imageDetailSub}" fontSize="55" textColor="#ff0080" fontStyle="bold" textAlign="vCenter|right" margin="10,20,0,0" />
+				<LABEL id="detailWon" themeId="themeFontFace" layout="230,80,200,70" text=" 원" fontSize="60" textColor="#ff0080" fontStyle="bold" textAlign="vCenter|left" margin="10,20,0,0" />
+				<BUTTON id="buyBtn" layout="380,60,150,53" defaultImg="embed:/moml/res/txt_buy_sel.png" onClick="function.buy" />
+				<BUTTON id="detailBtn" layout="560,26,140,105" defaultImg="embed:/moml/res/detail_btn.png" onClick="function.goDetail(xpath.evaluateEx('namespace', 'DATA/ITEMLIST/ITEM['+userVariable.imagePosition+']/URL/text()'))" />
+			</WINDOW>
+			<IMAGE id="menuPopup" layout="50,200,620,500" defaultImg="embed:/moml/res/main_popup_guide01.png" />
+			<BUTTON id="cameraBtn" layout="630,40,61,53" defaultImg="embed:/moml/res/none_capture_icon.png" onClick="function.goCamera" />
+			<BUTTON id="basketBtn" layout="20,900,140,63" defaultImg="embed:/moml/res/detail_btn_favorite_nomal.png" onClick="function.basketAdd(xpath.evaluateEx('namespace', 'DATA/ITEMLIST/ITEM['+userVariable.imagePosition+']/URL/text()'))" />
+		</WINDOW>
+	</UILAYOUT>
+</MOML>
+
+	
+
+					

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+	Created by ApplusForm.com on 2013.8.6
+
+	Permission is granted to copy, distribute, modify under the terms of ApplusForm License.
+
+	Copyright (C) 2014 ApplusForm.com. All rights reserved.
+-->
+<MOML version="1.1.5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.applusform.com/xsd/moml_ui_1.1.5.xsd">
+	<FUNCTION id="goDetail"><!-- 상세정보 화면 이동 -->
+		<CMD cmd="userVariable.dataSorcePath = '/remoteData/outerListData.xml'" />
+		<CMD cmd="action:go('root.start_navigationContainer.main.mainNavigation','detail')" />
+	</FUNCTION>
+
+	<FUNCTION id="searchCheck"><!-- 검색바 애니메이션 -->
+		<CMD condition="userVariable.searchStatus == 'false'" cmd="function.searchVisible" elseCmd="function.searchInvisible" />
+	</FUNCTION>
+
+	<FUNCTION id="searchVisible"><!-- 검색바 보이는 애니메이션 -->
+		<CMD cmd="userVariable.searchStatus = 'true'" />
+		<CMD cmd="animation.flyIn('searchBarWin', 0, -400, 1, 'easeOut3', 300, '')" />
+	</FUNCTION>
+
+	<FUNCTION id="searchInvisible"><!-- 검색바 안보이는 애니메이션 -->
+		<CMD cmd="userVariable.searchStatus = 'false'" />
+		<CMD cmd="animation.flyOut('searchBarWin', 0, -400, 1, 'easeOut3', 300, '')" />
+	</FUNCTION>
+
+	<FUNCTION id="goSearch(value)">
+		<CMD condition="userVariable.outerType != ''" cmd="outerList.dataList = '/DATA/ITEMLIST//ITEM[contains(NAME/text(), \''+value+'\') and CATEGORY[text() =\''+userVariable.outerType+'\']]'"
+			elseCmd="outerList.dataList = '/DATA/ITEMLIST//ITEM[contains(NAME/text(), \''+value+'\')]'" />
+		<CMD cmd="outerList.dataSource = '/remoteData/outerListData.xml'" />
+		<CMD cmd="searchEdit.text=''" />
+		<CMD cmd="function.searchInvisible" />
+	</FUNCTION>
+
+	<FUNCTION id="outerListType(type)"><!-- 품목별 리스트 보기 설정 -->
+		<CMD condition="type == 'all'"
+			cmd="all.textColor ='#ff6600', all.fontSize='30', jacket.textColor='#96a2bc', jacket.fontSize='20', coat.textColor ='#96a2bc', coat.fontSize='20', cardigan.textColor ='#96a2bc', cardigan.fontSize='20', outerList.dataList = '/DATA/ITEMLIST/ITEM', userVariable.outerType = ''" />
+		<CMD condition="type == 'jacket'"
+			cmd="all.textColor ='#96a2bc', all.fontSize='20', jacket.textColor='#ff6600', jacket.fontSize='30', coat.textColor ='#96a2bc', coat.fontSize='20', cardigan.textColor ='#96a2bc', cardigan.fontSize='20',  outerList.dataList = '/DATA/ITEMLIST//ITEM[CATEGORY[text() =\'JACKET\']]', userVariable.outerType = 'JACKET'" />
+		<CMD condition="type == 'coat'"
+			cmd="all.textColor ='#96a2bc', all.fontSize='20', jacket.textColor='#96a2bc', jacket.fontSize='20', coat.textColor ='#ff6600', coat.fontSize='30', cardigan.textColor ='#96a2bc', cardigan.fontSize='20',  outerList.dataList = '/DATA/ITEMLIST//ITEM[CATEGORY[text() =\'COAT\']]', userVariable.outerType = 'COAT'" />
+		<CMD condition="type == 'cardigan'"
+			cmd="all.textColor ='#96a2bc', all.fontSize='20', jacket.textColor='#96a2bc', jacket.fontSize='20', coat.textColor ='#96a2bc', coat.fontSize='20', cardigan.textColor ='#ff6600', cardigan.fontSize='30',  outerList.dataList = '/DATA/ITEMLIST//ITEM[CATEGORY[text() =\'CARDIGAN\']]', userVariable.outerType = 'CARDIGAN'" />
+		<CMD cmd="outerList.dataSource = '/remoteData/outerListData.xml'" />
+	</FUNCTION>
+
+
+	<CMD cmd="userVariable.searchStatus= 'false'" />
+	<CMD cmd="userVariable.outerType= ''" />
+	<UILAYOUT portrait="720,1170">
+		<WINDOW layout="10,0,700,1170" align="relative" onShow="root.start_navigationContainer.main.mainBackBtn.visible='invisible'">
+			<WINDOW layout="0,30,700,100" align="linear:horizontal|center">
+				<LABEL id="all" layout="160,100" text="ALL" fontSize="30" textColor="#ff6600" fontStyle="bold" textAlign="center" onClick="function.outerListType('all')" />
+				<LABEL id="jacket" layout="160,100" text="JACKET" fontSize="20" textColor="#96a2bc" fontStyle="bold" textAlign="center" onClick="function.outerListType('jacket')" />
+				<LABEL id="coat" layout="160,100" text="COAT" fontSize="20" textColor="#96a2bc" fontStyle="bold" textAlign="center" onClick="function.outerListType('coat')" />
+				<LABEL id="cardigan" layout="160,100" text="CARDIGAN" fontSize="20" textColor="#96a2bc" fontStyle="bold" textAlign="center" onClick="function.outerListType('cardigan')" />
+			</WINDOW>
+			<BUTTON id="searchIcon" layout="20,55,40,40" defaultImg="../res/searchIcon.png" onClick="function.searchCheck" />
+			<LIST id="outerList" layout="0,120,700,1050" dataSource="/remoteData/outerListData.xml" dataList="/DATA/ITEMLIST/ITEM" divider="#80b0ac9f">
+				<LISTLAYOUT>
+					<WINDOW layout="0,0,700,300" align="relative">
+						<IMAGE id="model" layout="25,20,210,260" defaultImg="{xpath.evaluate('./IMAGE/text()')}" />
+						<LABEL layout="250,36,200,60" themeId="themeListTitleName" text="{'['+xpath.evaluate('./NAME/text()')+']'}" textColor="#ffffff" />
+						<LABEL layout="250,90,450,120" themeId="themeFontFace" text="{xpath.evaluate('./SUB/text()')}" fontSize="25" minFontSize="0" ellipsis="end" multiLine="true" textColor="#a0a0a0" fontStyle="bold" />
+						<LABEL layout="250,220,200,60" themeId="themeListWon" text="{xpath.evaluate('./WON/text()') + ' 원'}" textColor="#ffa0a0" />
+					</WINDOW>
+					<BUTTON layout="0,0,700,300" themeId="themeListClickColor"
+						onClick="userVariable.imagePosition = xpath.evaluate('./POSITION/text()'), userVariable.imageDetailTitle =xpath.evaluate('./NAME/text()'),userVariable.imageDetailSub = xpath.evaluate('./WON/text()'),userVariable.imageDetailUrl = xpath.evaluate('./IMAGE/text()'), function.goDetail" />
+				</LISTLAYOUT>
+			</LIST>
+			<WINDOW id="searchBarWin" layout="20,130,680,75" align="linear:horizontal" visible="invisible">
+				<EDIT id="searchEdit" layout="580,75" text="" placeholder="검색하실 물품 이름을 입력하세요." fontSize="25" textAlign="vCenter" returnKeyType="go" />
+				<BUTTON id="serachBtn" layout="85,65" defaultImg="../res/searchBtn.png" margin="10,0,0,0" onClick="function.goSearch(searchEdit.text)" />
+			</WINDOW>
+		</WINDOW>
+	</UILAYOUT>
+</MOML>
+
+					
+	
+
+					

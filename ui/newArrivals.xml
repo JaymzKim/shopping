@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+	Created by ApplusForm.com on 2013.8.6
+
+	Permission is granted to copy, distribute, modify under the terms of ApplusForm License.
+
+	Copyright (C) 2014 ApplusForm.com. All rights reserved.
+-->
+<MOML version="1.1.5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.applusform.com/xsd/moml_ui_1.1.5.xsd">
+	<FUNCTION id="goDetail"><!-- 상세정보 화면 이동 -->
+		<CMD cmd="userVariable.dataSorcePath = '/remoteData/newArrivalsListData.xml'" />
+		<CMD cmd="action:go('root.start_navigationContainer.main.mainNavigation','detail')" />
+	</FUNCTION>
+
+	<UILAYOUT portrait="720,1170" theme="themeNewArrivals">
+		<WINDOW layout="10,0,700,1170" align="relative" onShow="root.start_navigationContainer.main.mainBackBtn.visible='invisible'">
+			<LIST id="newArrivalsList" layout="0,0,700,1170" dataSource="/remoteData/newArrivalsListData.xml" dataList="/DATA/ITEMLIST/ITEM" divider="#80b0ac9f">
+				<LISTLAYOUT>
+					<WINDOW layout="0,0,700,300" align="relative">
+						<IMAGE id="model" layout="25,20,210,260" defaultImg="{xpath.evaluate('./IMAGE/text()')}" />
+						<LABEL layout="250,36,200,60" themeId="themeListTitleName" text="{'['+xpath.evaluate('./NAME/text()')+']'}" textColor="#ffffff" />
+						<LABEL layout="250,90,450,120" themeId="themeFontFace" text="{xpath.evaluate('./SUB/text()')}" fontSize="25" minFontSize="0" ellipsis="end" multiLine="true" textColor="#a0a0a0" fontStyle="bold" />
+						<LABEL layout="250,220,200,60" themeId="themeListWon" text="{xpath.evaluate('./WON/text()') + ' 원'}" textColor="#ffa0a0" />
+						<IMAGE layout="0,0,70,70" defaultImg="embed:/moml/res/main_tab_new.png" />
+					</WINDOW>
+					<BUTTON layout="0,0,700,300" themeId="themeListClickColor"
+						onClick="userVariable.imagePosition = xpath.evaluate('./POSITION/text()'), userVariable.imageDetailTitle =xpath.evaluate('./NAME/text()'),userVariable.imageDetailSub = xpath.evaluate('./WON/text()'),userVariable.imageDetailUrl = xpath.evaluate('./IMAGE/text()'), function.goDetail" />
+				</LISTLAYOUT>
+			</LIST>
+		</WINDOW>
+	</UILAYOUT>
+</MOML>
+
+					
+	
+
+					

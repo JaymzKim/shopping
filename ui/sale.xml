@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+	Created by ApplusForm.com on 2013.8.6
+
+	Permission is granted to copy, distribute, modify under the terms of ApplusForm License.
+
+	Copyright (C) 2014 ApplusForm.com. All rights reserved.
+-->
+<MOML version="1.1.5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.applusform.com/xsd/moml_ui_1.1.5.xsd">
+	<FUNCTION id="goDetail">
+		<CMD cmd="userVariable.dataSorcePath = '/remoteData/saleListData.xml'" />
+		<CMD cmd="action:go('root.start_navigationContainer.main.mainNavigation','detail')" />
+	</FUNCTION>
+
+	<UILAYOUT portrait="720,1170">
+		<WINDOW layout="10,0,700,1170" align="relative" onShow="root.start_navigationContainer.main.mainBackBtn.visible='invisible'">
+			<LIST id="saleList" layout="0,10,700,1160" dataSource="/remoteData/saleListData.xml" dataList="/DATA/ITEMLIST/ITEM" divider="#80b0ac9f">
+				<LISTLAYOUT>
+					<WINDOW layout="0,0,700,650" align="relative" defaultImg="../res/plan_list_shadow.png">
+						<IMAGE id="model" layout="5,5,690,400" defaultImg="{xpath.evaluate('./IMAGE/text()')}" />
+						<LABEL layout="20,430,690,50" themeId="themeFontFace" text="{'['+xpath.evaluate('./NAME/text()')+']'}" fontSize="40" textColor="#323232" fontStyle="bold" />
+						<LABEL layout="20,480,680,50" themeId="themeFontFace" text="{xpath.evaluate('./SUB/text()')}" fontSize="30" textColor="#a0a0a0" fontStyle="bold" />
+						<LABEL layout="20,530,330,30" themeId="themeFontFace" text="{xpath.evaluate('./WON/text()') + ' 원'}" fontSize="20" textColor="#a0a0a0" fontStyle="bold" />
+						<LABEL layout="20,560,330,60" themeId="themeFontFace" text="{xpath.evaluate('./SALEWON/text()') + ' 원'}" fontSize="40" textColor="#ff0000" fontStyle="bold" />
+						<LABEL layout="20,540,100,2" defaultImg="#000000" />
+						<IMAGE layout="5,5,98,90" defaultImg="img/tag_discount_l.png">
+							<LABEL layout="0,0,98,90" themeId="themeFontFace" text="{xpath.evaluate('./SALE/text()')}" textColor="#ffffff" fontSize="30" fontStyle="bold" textAlign="center" />
+						</IMAGE>
+					</WINDOW>
+					<BUTTON layout="0,0,700,650" themeId="themeListClickColor"
+						onClick="userVariable.imagePosition = xpath.evaluate('./POSITION/text()'), userVariable.imageDetailTitle =xpath.evaluate('./NAME/text()'),userVariable.imageDetailSub = xpath.evaluate('./WON/text()'),userVariable.imageDetailUrl = xpath.evaluate('./IMAGE/text()'), function.goDetail" />
+				</LISTLAYOUT>
+			</LIST>
+		</WINDOW>
+	</UILAYOUT>
+</MOML>
+
+	
+
+					

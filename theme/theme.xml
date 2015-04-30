@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+	Created by ApplusForm.com on 2013.8.6
+
+	Permission is granted to copy, distribute, modify under the terms of ApplusForm License.
+
+	Copyright (C) 2014 ApplusForm.com. All rights reserved.
+-->
+<MOML version="1.0.0">
+    <THEME id="themeFontFace" fontFace="embed:/moml/res/font/drfont_daraehand_Basic.ttf"/>
+    <THEME id="themeListTitleName" fontFace="embed:/moml/res/font/drfont_daraehand_Basic.ttf" fontSize="40" fontStyle="bold"/>
+    <THEME id="themeListWon" fontFace="embed:/moml/res/font/drfont_daraehand_Basic.ttf" fontSize="40" fontStyle="bold"/>
+    <THEME id="themeListClickColor" defaultImg="#00000000" pressedImg="#95ffbfbf"/>
+</MOML>

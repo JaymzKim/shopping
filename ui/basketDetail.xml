@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+	Created by ApplusForm.com on 2013.8.6
+
+	Permission is granted to copy, distribute, modify under the terms of ApplusForm License.
+
+	Copyright (C) 2014 ApplusForm.com. All rights reserved.
+-->
+<MOML version="1.1.5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.applusform.com/xsd/moml_ui_1.1.5.xsd">
+	<FUNCTION id="goNext">
+		<CMD cmd="userVariable.totalpage = xpath.evaluateEx(userVariable.basketData, 'count(/DATA/ROW)')" />
+		<CMD condition="math.num(userVariable.imagePosition) &lt; math.num(userVariable.totalpage)" cmd="userVariable.imagePosition = math.add(userVariable.imagePosition, 1), function.goNext" elseCmd="device.toastPopup('마지막 상품 입니다.')" />
+	</FUNCTION>
+
+	<FUNCTION id="goNext">
+		<CMD cmd="animation.hide('detailTitle', 'fade', '', 500, '')" />
+		<CMD cmd="animation.hide('detailSub', 'fade', '', 500, '')" />
+		<CMD cmd="animation.hide('detailWon', 'fade', '', 500, '')" />
+		<CMD cmd="animation.hide('detailBtn', 'fade', '', 500, '')" />
+		<CMD cmd="animation.hide('basketBtn', 'fade', '', 500, '')" />
+		<CMD cmd="animation.hide('cameraBtn', 'fade', '', 500, '')" />
+		<CMD cmd="animation.hide('buyBtn', 'fade', '', 500, '')" />
+		<CMD cmd="animation.hide('imageDetail', 'fade', '', 500, 'function.detailChage')" />
+	</FUNCTION>
+
+	<FUNCTION id="goPrev">
+		<CMD condition="math.num(userVariable.imagePosition) &gt; 1"
+			cmd="userVariable.imagePosition = math.sub(userVariable.imagePosition, 1),animation.hide('detailTitle', 'fade', '', 500, ''), animation.hide('detailSub', 'fade', '', 500, ''),animation.hide('detailBtn', 'fade', '', 500, ''),animation.hide('buyBtn', 'fade', '', 500, ''),animation.hide('imageDetail', 'fade', '', 500, 'function.detailChage')" />
+	</FUNCTION>
+
+	<FUNCTION id="detailChage">
+		<CMD cmd="detailTitle.text = xpath.evaluateEx(userVariable.basketData, '/DATA/ROW['+userVariable.imagePosition+']/@title')" />
+		<CMD cmd="detailSub.text = xpath.evaluateEx(userVariable.basketData, '/DATA/ROW['+userVariable.imagePosition+']/@subtitle')" />
+		<CMD cmd="imageDetail.defaultImg = xpath.evaluateEx(userVariable.basketData, '/DATA/ROW['+userVariable.imagePosition+']/@imagepath')" />
+		<CMD cmd="animation.flyIn('detailTitle', 1400,0,200,80,'bounce',500,'')" />
+		<CMD cmd="animation.flyIn('detailSub', 1400,0,200,80,'bounce',500,'')" />
+		<CMD cmd="animation.flyIn('detailSub1', 1400,0,200,80,'bounce',500,'')" />
+		<CMD cmd="animation.flyIn('detailBtn', 1000,0,150,150,'bounce',500,'')" />
+		<CMD cmd="animation.flyIn('buyBtn', 1000,0,150,150,'bounce',500,'')" />
+		<CMD cmd="animation.show('basketBtn', 'fade', '', 500, '')" />
+		<CMD cmd="animation.show('cameraBtn', 'fade', '', 500, '')" />
+		<CMD cmd="animation.show('imageDetail', 'fade', '', 500, '')" />
+	</FUNCTION>
+
+	<FUNCTION id="startAni">
+		<CMD cmd="animation.hide('menuPopup', 'fade', '', 1000, '')" delay="1000" />
+	</FUNCTION>
+
+	<FUNCTION id="goDetail(value)">
+		<CMD cmd="userVariable.webSiteUrl = value" />
+		<CMD cmd="action:go('root.start_navigationContainer.main.mainNavigation','webSite')" />
+	</FUNCTION>
+
+	<FUNCTION id="goCamera">
+		<CMD cmd="action:go('root.start_navigationContainer.main.mainNavigation','camera')" />
+	</FUNCTION>
+
+	<FUNCTION id="buy">
+		<CMD cmd="action:go('root.start_navigationContainer.main.mainNavigation','buy')" />
+	</FUNCTION>
+
+
+	<DATASOURCE id="namespace" src="{userVariable.dataSorcePath}" />
+	<CMD cmd="root.start_navigationContainer.main.mainBackBtn.visible='visible'" />
+	<UILAYOUT portrait="720,1170">
+		<WINDOW layout="0,0,720,1170" align="relative" onShow="function.startAni" onFlickRight="function.goPrev" onFlickLeft="function.goNextCheck">
+			<IMAGE id="imageDetail" layout="10,10,700,990" defaultImg="{userVariable.imageDetailUrl}" />
+			<WINDOW layout="0,1010,720,160" align="relative" defaultImg="embed:/moml/res/detail_footer_bg.png">
+				<LABEL id="detailTitle" themeId="themeFontFace" layout="30,26,520,50" text="{userVariable.imageDetailTitle}" fontSize="40" minFontSize="0" ellipsis="end" multiLine="false" textColor="#a7a5a9"
+					fontStyle="bold" textAlign="vCenter" margin="10,50,0,0" />
+				<LABEL id="detailSub" themeId="themeFontFace" layout="30,80,200,70" text="{userVariable.imageDetailSub}" fontSize="60" textColor="#ff0080" fontStyle="bold" textAlign="vCenter|right" margin="10,20,0,0" />
+				<LABEL id="detailSub1" themeId="themeFontFace" layout="230,80,200,70" text=" 원" fontSize="60" textColor="#ff0080" fontStyle="bold" textAlign="vCenter|left" margin="10,20,0,0" />
+				<BUTTON id="buyBtn" layout="380,60,150,53" defaultImg="embed:/moml/res/txt_buy_sel.png" onClick="function.buy" />
+				<BUTTON id="detailBtn" layout="560,26,140,105" defaultImg="embed:/moml/res/detail_btn.png" onClick="function.goDetail(xpath.evaluateEx(userVariable.basketData, '/DATA/ROW['+userVariable.imagePosition+']/@url'))" />
+			</WINDOW>
+			<IMAGE id="menuPopup" layout="50,200,620,500" defaultImg="embed:/moml/res/main_popup_guide01.png" />
+			<BUTTON id="cameraBtn" layout="630,40,61,53" defaultImg="embed:/moml/res/none_capture_icon.png" onClick="function.goCamera" />
+		</WINDOW>
+	</UILAYOUT>
+</MOML>
+
+	
+
+					

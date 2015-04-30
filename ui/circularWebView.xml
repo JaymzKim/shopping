@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+	Created by ApplusForm.com on 2013.8.6
+
+	Permission is granted to copy, distribute, modify under the terms of ApplusForm License.
+
+	Copyright (C) 2014 ApplusForm.com. All rights reserved.
+-->
+<MOML version="1.1.5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.applusform.com/xsd/moml_ui_1.1.5.xsd">
+
+	<FUNCTION id="animateMenus">
+		<CMD condition="menu1.visible=='visible'" cmd="function.hideMenus()" elseCmd="function.showMenus()" />
+	</FUNCTION>
+
+	<FUNCTION id="rotateMenus(degree)">
+		<CMD cmd="animation.rotate('menu1', degree, menu1.width/2, menu1.height/2, '', '350', '')" />
+		<CMD cmd="animation.rotate('menu2', degree, menu1.width/2, menu1.height/2, '', '400', '')" />
+		<CMD cmd="animation.rotate('menu3', degree, menu1.width/2, menu1.height/2, '', '450', '')" />
+		<CMD cmd="animation.rotate('menu4', degree, menu1.width/2, menu1.height/2, '', '500', '')" />
+		<CMD cmd="animation.rotate('menu5', degree, menu1.width/2, menu1.height/2, '', '550', '')" />
+	</FUNCTION>
+
+	<FUNCTION id="showMenus">
+		<CMD cmd="menuWin.left = 0, menuWin.top = 230, menuWin.width=120, menuWin.Height=140, menu.top=100" />
+		<CMD cmd="function.rotateMenus(360)" />
+		<CMD cmd="animation.flyIn('menu1', 0, menu.top-menu1.top, 1, 'easeOut3', 300, '')" />
+		<CMD cmd="animation.flyIn('menu2', menu.left-menu2.left, menu.top-menu2.top, 1, 'easeOut3', 350, '')" />
+		<CMD cmd="animation.flyIn('menu3', menu.left-menu3.left, menu.top-menu3.top, 1, 'easeOut3', 400, '')" />
+		<CMD cmd="animation.flyIn('menu4', menu.left-menu4.left, menu.top-menu4.top, 1, 'easeOut3', 450, '')" />
+		<CMD cmd="animation.flyIn('menu5', menu.left-menu5.left, menu.top-menu5.top, 1, 'easeOut3', 500, '')" />
+		<CMD cmd="menu.defaultImg='embed:/moml/res/circular/button_grey_delete.png'" delay="500" />
+	</FUNCTION>
+
+	<FUNCTION id="hideMenus">
+		<CMD cmd="function.rotateMenus(-360)" />
+		<CMD cmd="animation.flyOut('menu1', 0, menu.top-menu1.top, 1, 'easeIn3', 300, '')" />
+		<CMD cmd="animation.flyOut('menu2', menu.left-menu2.left, menu.top-menu2.top, 1, 'easeIn3', 350, '')" />
+		<CMD cmd="animation.flyOut('menu3', menu.left-menu3.left, menu.top-menu3.top, 1, 'easeIn3', 400, '')" />
+		<CMD cmd="animation.flyOut('menu4', menu.left-menu4.left, menu.top-menu4.top, 1, 'easeIn3', 450, '')" />
+		<CMD cmd="animation.flyOut('menu5', menu.left-menu5.left, menu.top-menu5.top, 1, 'easeIn3', 500, '')" />
+		<CMD cmd="menu.defaultImg='embed:/moml/res/circular/button_grey_add.png'" delay="500" />
+		<CMD cmd="menuWin.left = 0, menuWin.top = 330, menuWin.width=40, menuWin.Height=30, menu.top = 0" delay="500" />
+	</FUNCTION>
+
+	<FUNCTION id="calculateX(index)">
+		<CMD cmd="userVariable.result=math.cosd(270 + 90 / 4 * index)" /> <!-- 4 = menu count - 1 -->
+		<CMD cmd="userVariable.result=math.mul(userVariable.result, 70)" />
+		<CMD cmd="userVariable.result=math.add(userVariable.result, 10)" />
+	</FUNCTION>
+
+	<FUNCTION id="calculateY(index)">
+		<CMD cmd="userVariable.result=math.sind(270 + 90 / 4 * index)" />
+		<CMD cmd="userVariable.result=math.mul(userVariable.result, 80)" />
+		<CMD cmd="userVariable.result=math.add(userVariable.result, 100)" />
+	</FUNCTION>
+	<FUNCTION id="delayInit">
+		<CMD cmd="function.animateMenus()" delay="1500" />
+	</FUNCTION>
+
+	<CMD cmd="function.delayInit" />
+	<UILAYOUT portrait="320,370" landscape="320,370">
+		<WEBVIEW id="webView1" layout="0,0,320,370" src="{userVariable.webSiteUrl}" controls="none" supportZoom="true" />
+		<WINDOW id="menuWin" layout="0,230,120,140" onCreate="function.delayInit">
+			<BUTTON id="menu1" layout="function.calculateX(0),function.calculateY(0),30,25" defaultImg="embed:/moml/res/circular/button_grey_home.png" onClick="webView1.src=userVariable.webSiteUrl" />
+			<BUTTON id="menu2" layout="function.calculateX(1),function.calculateY(1),30,25" defaultImg="embed:/moml/res/circular/button_grey_back.png" onClick="webView1.back" />
+			<BUTTON id="menu3" layout="function.calculateX(2),function.calculateY(2),30,25" defaultImg="embed:/moml/res/circular/button_grey_forward.png" onClick="webView1.forward" />
+			<BUTTON id="menu4" layout="function.calculateX(3),function.calculateY(3),30,25" defaultImg="embed:/moml/res/circular/button_grey_refresh.png" onClick="webView1.refresh" />
+			<BUTTON id="menu5" layout="function.calculateX(4),function.calculateY(4),30,25" defaultImg="embed:/moml/res/circular/button_grey_exit.png" onClick="action:back('root.start_navigationContainer.main.mainNavigation')" />
+			<BUTTON id="menu" layout="10,100,30,25" defaultImg="embed:/moml/res/circular/button_grey_delete.png" onClick="function.animateMenus()" />
+		</WINDOW>
+	</UILAYOUT>
+</MOML>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<MOML version="1.1.0">
+
+	<FUNCTION id="toapp"><!-- 상세정보 화면 이동 -->
+		<CMD cmd="device.log('cgy', '~~~~' +'toapp:launchAcnt:&amp;approve_no=22000015&amp;serial_no=0000000&amp;receipt_yn=N&amp;amount=1004&amp;firm_name=KCP&amp;user_key=201311111384145488264')" />
+		<CMD cmd="userVariable.value = 'toapp:launchAcnt:&amp;approve_no=22000015&amp;serial_no=0000000&amp;receipt_yn=N&amp;amount=1004&amp;firm_name=KCP&amp;user_key=201311111384145488264'" />
+		<CMD cmd="device.log('cgy', '1 : '+string.getSplitString(userVariable.value,':', 1))" />
+		<CMD cmd="device.log('cgy', '2 : '+string.getSplitString(userVariable.value,':', 2))" />
+		<CMD cmd="device.log('cgy', '3 : '+ 'kftc-bankpay://eftpay?callbackfunc=shoppingPay://payResult?'+string.getSplitString(userVariable.value,':', 2)+'&amp;')" />
+		<CMD cmd="userVariable.value1 = 'kftc-bankpay://eftpay?callbackfunc=shoppingPay://payResult?'+string.getSplitString(userVariable.value,':', 2)+'&amp;'" />
+		<CMD cmd="device.log('cgy', '4 : '+ string.encoding(userVariable.value1,'utf-8'))" />
+		<CMD cmd="device.log('cgy', '5 : '+ appLauncher.canOpenUri(userVariable.value1))" />
+		<CMD condition="appLauncher.canOpenUri(userVariable.value1) != '0'" cmd="appLauncher.openUri(userVariable.value1,'')" elseCmd="appLauncher.openUri('http://itunes.apple.com/kr/app/id398456030?mt=8','')" />
+	</FUNCTION>
+	<UILAYOUT portrait="720,1170">
+		<WINDOW layout="0,0,720,1170" align="relative">
+			<WEBVIEW id="web" layout="0,0,720,1170" src="/data/index.html" controls="none" supportZoom="true">
+				<LINKMAP baseUrl="">
+					<LINK url="about:blank" cmd="'ignore'" />
+					<LINK url="toApp:" cmd="function.toapp" />
+				</LINKMAP>
+			</WEBVIEW>
+		</WINDOW>
+	</UILAYOUT>
+	<CMD cmd="device.log('cgy', document.fullPathId)" />
+</MOML>

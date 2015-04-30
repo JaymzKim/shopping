@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+	Created by ApplusForm.com on 2013.8.6
+
+	Permission is granted to copy, distribute, modify under the terms of ApplusForm License.
+
+	Copyright (C) 2014 ApplusForm.com. All rights reserved.
+-->
+<MOML version="1.1.5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.applusform.com/xsd/moml_ui_1.1.5.xsd">
+	<FUNCTION id="toggleCameraType">
+		<CMD condition="camera.type=='front'" cmd="userVariable.cameraType='back'" elseCmd="userVariable.cameraType='front'" />
+		<CMD cmd="camera.type=userVariable.cameraType" />
+	</FUNCTION>
+	<UILAYOUT portrait="720,1170">
+		<WINDOW layout="0,0,720,1170" align="relative">
+			<CAMERA id="camera" layout="0,0,720,1170" type="{userVariable.cameraType}" />
+			<WEBVIEW id="webview" layout="0,0,720,1170" defaultImg="#00000000" controls="none" supportZoom="true" src="embed:/moml/res/Noname1.html" visible="invisible" />
+			<BUTTON layout="570,10,150,150" defaultImg="/res/camera_rotate.png" onClick="function.toggleCameraType" />
+		</WINDOW>
+	</UILAYOUT>
+	<CMD cmd="camera.open()" delay="500" />
+	<CMD cmd="webview.visible='visible'" delay="1000" />
+</MOML>
+					

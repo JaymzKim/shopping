@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+	Created by ApplusForm.com on 2013.8.6
+
+	Permission is granted to copy, distribute, modify under the terms of ApplusForm License.
+
+	Copyright (C) 2014 ApplusForm.com. All rights reserved.
+-->
+<MOML version="1.1.5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.applusform.com/xsd/moml_ui_1.1.5.xsd">
+	<THEMES id="themeMain">
+		<THEME id="themeLabelText" fontSize="30" textColor="#fefefe" fontStyle="bold" textAlign="center" defaultImg="../res/holo_nor.png" fontFace="../res/font/drfont_daraehand_Basic.ttf" />
+	</THEMES>
+	<FUNCTION id="categoryCheck"><!-- 카테고리 상태체크 -->
+		<CMD condition="userVariable.categoryStatus == 'false'" cmd="function.categoryVisible" elseCmd="function.categoryInvisible" />
+	</FUNCTION>
+
+	<FUNCTION id="goBack">
+		<CMD cmd="action:back('root.start_navigationContainer.main.mainNavigation')" />
+	</FUNCTION>
+
+	<FUNCTION id="categoryVisible"><!-- 카테고리 보이게 하는 애니메이션 -->
+		<CMD cmd="aniBtnWindow.enabled = 'false'" />
+		<CMD cmd="aniBtnWindow.visible='visible'" />
+		<CMD cmd="userVariable.categoryStatus = 'true'" />
+		<CMD cmd="tabMenuImg.defaultImg= '../res/tabBar.png'" />
+		<CMD cmd="tabMenu.top=1010" />
+		<CMD cmd="animation.flyIn('tabMenu', 0, 80 - tabMenu.top, tabMenu.width, tabMenu.height, 'easeOut3', 300, '')" />
+		<CMD cmd="animation.show('best', 'fade', '', 500, '')" />
+		<CMD cmd="animation.show('newArrivals', 'fade', '', 500, '')" />
+		<CMD cmd="animation.show('sale', 'fade', '', 500, '')" />
+		<CMD cmd="animation.show('outer', 'fade', '', 500, '')" />
+		<CMD cmd="animation.show('top', 'fade', '', 500, '')" />
+		<CMD cmd="animation.show('customerCenter', 'fade', '', 500, '')" />
+		<CMD cmd="animation.show('service', 'fade', '', 500, '')" />
+		<CMD cmd="animation.show('basket', 'fade', '', 500, '')" />
+		<CMD cmd="animation.show('help', 'fade', '', 500, '')" />
+		<CMD cmd="aniBtnWindow.enabled = 'true'" delay="500" />
+	</FUNCTION>
+
+	<FUNCTION id="categoryInvisible"><!-- 카테고리 안보이게 하는 애니메이션 -->
+		<CMD cmd="userVariable.categoryStatus = 'false'" />
+		<CMD cmd="animation.hide('best', 'fade', '', 500, '')" />
+		<CMD cmd="animation.hide('newArrivals', 'fade', '', 500, '')" />
+		<CMD cmd="animation.hide('sale', 'fade', '', 500, '')" />
+		<CMD cmd="animation.hide('outer', 'fade', '', 500, '')" />
+		<CMD cmd="animation.hide('top', 'fade', '', 500, '')" />
+		<CMD cmd="animation.hide('customerCenter', 'fade', '', 500, '')" />
+		<CMD cmd="animation.hide('service', 'fade', '', 500, '')" />
+		<CMD cmd="animation.hide('basket', 'fade', '', 500, '')" />
+		<CMD cmd="animation.hide('help', 'fade', '', 500, '')" />
+		<CMD cmd="aniBtnWindow.visible='invisible'" delay="500" />
+		<CMD cmd="tabMenuImg.defaultImg= '../res/tabBar_nor.png', tabMenu.top='80', animation.flyIn('tabMenu', 0, 1010 - tabMenu.top, tabMenu.width, tabMenu.height, 'easeOut3', 300, '')" delay="200" />
+	</FUNCTION>
+	<CMD cmd="userVariable.categoryStatus = 'false'" />
+	<UILAYOUT portrait="720,1280" theme="themeMain">
+		<WINDOW layout="0,0,720,1280" align="relative">
+			<NAVIGATIONCONTAINER id="mainNavigation" layout="0,110,720,1170" selectedItem="best" defaultImg="../res/bg.png">
+				<VIEWITEM id="newArrivals" src="newArrivals.xml" transitionInEffect="fade" transitionOutEffect="fade">
+					<VIEWITEM id="detail" src="detail.xml" transitionInEffect="fade" transitionOutEffect="fade">
+						<VIEWITEM id="buy" src="buy.xml" transitionInEffect="fade" transitionOutEffect="fade" />
+						<VIEWITEM id="webSite" src="circularWebView.xml" transitionInEffect="fade" transitionOutEffect="fade" />
+						<VIEWITEM id="camera" src="camera.xml" transitionInEffect="fade" transitionOutEffect="fade" />
+					</VIEWITEM>
+				</VIEWITEM>
+				<VIEWITEM id="best" src="best.xml" transitionInEffect="fade" transitionOutEffect="fade">
+					<VIEWITEM id="detail" src="detail.xml" transitionInEffect="fade" transitionOutEffect="fade">
+						<VIEWITEM id="buy" src="buy.xml" transitionInEffect="fade" transitionOutEffect="fade" />
+						<VIEWITEM id="webSite" src="circularWebView.xml" transitionInEffect="fade" transitionOutEffect="fade" />
+						<VIEWITEM id="camera" src="camera.xml" transitionInEffect="fade" transitionOutEffect="fade" />
+					</VIEWITEM>
+				</VIEWITEM>
+				<VIEWITEM id="outer" src="outer.xml" transitionInEffect="fade" transitionOutEffect="fade">
+					<VIEWITEM id="detail" src="detail.xml" transitionInEffect="fade" transitionOutEffect="fade">
+						<VIEWITEM id="buy" src="buy.xml" transitionInEffect="fade" transitionOutEffect="fade" />
+						<VIEWITEM id="webSite" src="circularWebView.xml" transitionInEffect="fade" transitionOutEffect="fade" />
+						<VIEWITEM id="camera" src="camera.xml" transitionInEffect="fade" transitionOutEffect="fade" />
+					</VIEWITEM>
+				</VIEWITEM>
+				<VIEWITEM id="top" src="top.xml" transitionInEffect="fade" transitionOutEffect="fade">
+					<VIEWITEM id="detail" src="detail.xml" transitionInEffect="fade" transitionOutEffect="fade">
+						<VIEWITEM id="buy" src="buy.xml" transitionInEffect="fade" transitionOutEffect="fade" />
+						<VIEWITEM id="webSite" src="circularWebView.xml" transitionInEffect="fade" transitionOutEffect="fade" />
+						<VIEWITEM id="camera" src="camera.xml" transitionInEffect="fade" transitionOutEffect="fade" />
+					</VIEWITEM>
+				</VIEWITEM>
+				<VIEWITEM id="customerCenter" src="customerCenter.xml" transitionInEffect="fade" transitionOutEffect="fade" />
+
+				<VIEWITEM id="shoppingBasket" src="shoppingBasket.xml" transitionInEffect="fade" transitionOutEffect="fade">
+					<VIEWITEM id="basketDetail" src="basketDetail.xml" transitionInEffect="fade" transitionOutEffect="fade">
+						<VIEWITEM id="buy" src="buy.xml" transitionInEffect="fade" transitionOutEffect="fade" />
+						<VIEWITEM id="webSite" src="circularWebView.xml" transitionInEffect="fade" transitionOutEffect="fade" />
+						<VIEWITEM id="camera" src="camera.xml" transitionInEffect="fade" transitionOutEffect="fade" />
+					</VIEWITEM>
+				</VIEWITEM>
+
+				<VIEWITEM id="sale" src="sale.xml" transitionInEffect="fade" transitionOutEffect="fade">
+					<VIEWITEM id="detail" src="detail.xml" transitionInEffect="fade" transitionOutEffect="fade">
+						<VIEWITEM id="buy" src="buy.xml" transitionInEffect="fade" transitionOutEffect="fade" />
+						<VIEWITEM id="webSite" src="circularWebView.xml" transitionInEffect="fade" transitionOutEffect="fade" />
+						<VIEWITEM id="camera" src="camera.xml" transitionInEffect="fade" transitionOutEffect="fade" />
+					</VIEWITEM>
+				</VIEWITEM>
+				<VIEWITEM id="service" src="circularWebView.xml" transitionInEffect="fade" transitionOutEffect="fade" />
+				<VIEWITEM id="help" src="help.xml" transitionInEffect="fade" transitionOutEffect="fade" />
+			</NAVIGATIONCONTAINER>
+			<!-- 애니메이션 메뉴 영역 -->
+			<WINDOW id="aniBtnWindow" layout="0,110,720,1170" align="relative" visible="invisible" onClick="function.categoryInvisible">
+				<BUTTON id="help" layout="215,805,288,120" text="도움말" themeId="themeLabelText" visible="invisible" onClick="function.categoryInvisible,mainNavigation.selectItem = 'help' , topTitle.text='도움말'" />
+				<BUTTON id="basket" layout="215,705,288,120" text="관심상품" themeId="themeLabelText" visible="invisible" onClick="function.categoryInvisible,mainNavigation.selectItem = 'shoppingBasket' , topTitle.text='관심상품'" />
+				<BUTTON id="service" layout="215,605,288,120" text="택배조회" themeId="themeLabelText" visible="invisible"
+					onClick="function.categoryInvisible,mainNavigation.selectItem = 'service' , userVariable.webSiteUrl = 'http://service.epost.go.kr/iservice/trace/Trace.jsp', topTitle.text='택배조회'" />
+				<BUTTON id="customerCenter" layout="215,505,288,120" text="고객센터" themeId="themeLabelText" visible="invisible"
+					onClick="function.categoryInvisible,mainNavigation.selectItem = 'customerCenter' , topTitle.text='고객센터'" />
+				<BUTTON id="top" layout="215,405,288,120" text="TOP" themeId="themeLabelText" visible="invisible" onClick="function.categoryInvisible, mainNavigation.selectItem = 'top' , topTitle.text='TOP'" />
+				<BUTTON id="outer" layout="215,305,288,120" text="OUTER" themeId="themeLabelText" visible="invisible" onClick="function.categoryInvisible, mainNavigation.selectItem = 'outer' , topTitle.text='OUTER'" />
+				<BUTTON id="sale" layout="215,205,288,120" text="SALE" themeId="themeLabelText" visible="invisible" onClick="function.categoryInvisible, mainNavigation.selectItem = 'sale' , topTitle.text='SALE'" />
+				<BUTTON id="newArrivals" layout="215,105,288,120" text="신상품" themeId="themeLabelText" visible="invisible" onClick="function.categoryInvisible, mainNavigation.selectItem = 'newArrivals' , topTitle.text='신상품'" />
+				<BUTTON id="best" layout="215,5,288,120" text="BEST" themeId="themeLabelText" visible="invisible" onClick="function.categoryInvisible, mainNavigation.selectItem = 'best', topTitle.text='BEST'" />
+			</WINDOW>
+			<!-- 상단 title 영역 -->
+			<WINDOW layout="0,0,720,110" defaultImg="../res/bar_top.png">
+				<BUTTON id="mainBackBtn" layout="10,15,130,85" defaultImg="../res/backBtn.png" visible="invisible" onClick="function.goBack">
+					<LABEL layout="10,0,120,85" text="뒤로" fontSize="35" textColor="#fefefe" fontStyle="bold" textAlign="center" fontFace="../res/font/drfont_daraehand_Basic.ttf" />
+				</BUTTON>
+				<LABEL id="topTitle" layout="0,0,720,110" text="BEST" fontSize="50" textColor="#fefefe" fontStyle="bold" textAlign="center" fontFace="../res/font/drfont_daraehand_Basic.ttf" />
+				<BUTTON layout="630,20,75,75" defaultImg="../res/btn_brand_hompage_nor.png" onClick="appLauncher.openUri('http://www.lalalady.co.kr', '')" />
+			</WINDOW>
+			<IMAGE layout="0,110,720,10" defaultImg="../res/line.png" />
+			<!-- 애니메이션 메뉴 접기/펼치기 버튼 -->
+			<WINDOW id="tabMenu" layout="240,80,240,80" onClick="function.categoryCheck"> <!-- 클릭하기 쉽게 이미지보다 크게 만든다. -->
+				<LABEL id="tabMenuImg" layout="40,40,160,40" defaultImg="../res/tabBar_nor.png" />
+			</WINDOW>
+		</WINDOW>
+	</UILAYOUT>
+</MOML>

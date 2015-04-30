@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+	Created by ApplusForm.com on 2013.8.6
+
+	Permission is granted to copy, distribute, modify under the terms of ApplusForm License.
+
+	Copyright (C) 2014 ApplusForm.com. All rights reserved.
+-->
+<MOML version="1.1.5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.applusform.com/xsd/moml_ui_1.1.5.xsd">
+	<FUNCTION id="callAni"><!-- 고객센터 애니메이션 -->
+		<CMD condition="customerWindow.visible == 'invisible'" cmd="customerCenterWindow.top = 100" elseCmd="customerCenterWindow.top = 300" />
+		<CMD condition="customerWindow.visible == 'invisible'" cmd="customerMapWindow.visible ='invisible', animation.flyIn('customerWindow', 0,-300,700,400,'',1000,''), userVariable.customerAniStatus = 'true'"
+			elseCmd="customerMapWindow.visible ='invisible',animation.flyOut('customerWindow', 0,-200,700,400,'',1000,''), userVariable.customerAniStatus = 'false'" />
+	</FUNCTION>
+
+	<FUNCTION id="mapAni"><!-- 위치 애니메이션 -->
+		<CMD condition="customerMapWindow.visible == 'invisible'" cmd="customerCenterWindow.top = 100" elseCmd="customerCenterWindow.top = 300" />
+		<CMD condition="customerMapWindow.visible == 'invisible'" cmd="customerWindow.visible ='invisible', animation.flyIn('customerMapWindow', 0,-300,700,400,'',1000,''), userVariable.customerAniStatus = 'true'"
+			elseCmd="customerWindow.visible ='invisible', animation.flyOut('customerMapWindow', 0,-200,700,400,'',1000,''), userVariable.customerAniStatus = 'false'" />
+	</FUNCTION>
+	<CMD cmd="userVariable.customerAniStatus = 'false'" />
+	<UILAYOUT portrait="720,1170">
+		<WINDOW layout="10,0,700,1170" align="relative" onShow="root.start_navigationContainer.main.mainBackBtn.visible='invisible'">
+			<WINDOW id="customerWindow" layout="10,500,700,600" align="linear:vertical|center" visible="invisible" defaultImg="embed:/moml/res/detail_image_boxline.png">
+				<LABEL layout="700,100" themeId="themeFontFace" text="♡ 고객 센터 ♡" fontSize="60" textColor="#ffffff" textAlign="center" fontStyle="bold" />
+				<LABEL layout="700,70" themeId="themeFontFace" text="070-8742-XXXX" fontSize="50" textColor="#ffffff" textAlign="center" fontStyle="bold" onClick="appLauncher.openUri('tel:02-XXX-XXXX', '')" />
+				<LABEL layout="700,70" themeId="themeFontFace" text="월 ~ 급 AM 10:00 ~ PM 6:00" fontSize="50" textColor="#ffffff" textAlign="center" fontStyle="bold" />
+				<LABEL layout="700,70" themeId="themeFontFace" text="토/일요일, 공휴일 휴무" fontSize="50" textColor="#ffffff" textAlign="center" fontStyle="bold" />
+				<BUTTON id="call" layout="220,80" defaultImg="embed:/moml/res/detail_btn_02.png" onClick="appLauncher.openUri('tel:070-8742-XXXX', '')" margin="250,10,0,0" />
+			</WINDOW>
+			<WINDOW id="customerMapWindow" layout="10,500,700,600" align="linear:vertical|center" visible="invisible" defaultImg="embed:/moml/res/detail_image_boxline.png">
+				<MAPVIEW layout="700,600" align="linear:vertical" dataSource="../data/mapDataTest.xml" dataList="/MAPDATA/MARKERITEM" zoomLevel="17" latitudePath="@lat" longitudePath="@lon" titlePath="@title"
+					snippetPath="@snippet" onShow="caller.setCenter('37.5207768','126.9280603')" />
+			</WINDOW>
+			<WINDOW id="customerCenterWindow" layout="10,300,700,400" align="relative" defaultImg="embed:/moml/res/text_box.png">
+				<BUTTON layout="110,30,200,203" defaultImg="embed:/moml/res/customerCenter.png" onClick="function.callAni" />
+				<LABEL layout="110,240,200,50" themeId="themeFontFace" text="고객센터" fontSize="30" textColor="#000000" textAlign="center" fontStyle="bold" />
+				<BUTTON layout="420,30,200,203" defaultImg="embed:/moml/res/map.png" onClick="function.mapAni" />
+				<LABEL layout="420,240,200,50" themeId="themeFontFace" text="위치" fontSize="30" textColor="#000000" textAlign="center" fontStyle="bold" />
+			</WINDOW>
+		</WINDOW>
+	</UILAYOUT>
+</MOML>
+
+					
+	
+
+					

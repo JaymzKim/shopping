@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DATA>
+    <ITEMLIST>
+        <ITEM>
+            <POSITION>1</POSITION>
+            <NAME>밴딩 데님</NAME>
+            <SUB>시원하고 편한 밴딩 데님 반바지/연청,중청,진청</SUB>
+	    	<IMAGE>/remoteData/image/newArrivals/image1.jpg</IMAGE>
+	    	<WON>18,000</WON>
+	    	<URL>http://www.lalalady.co.kr/front/php/product.php?product_no=834&amp;main_cate_no=1&amp;display_group=3</URL>
+        </ITEM>
+        <ITEM>
+            <POSITION>2</POSITION>
+            <NAME>플라워</NAME>
+            <SUB>플라워 쉬폰 가오리 티셔츠</SUB>
+	    	<IMAGE>/remoteData/image/newArrivals/image2.jpg</IMAGE>
+	    	<WON>19,900</WON>
+	    	<URL>http://www.lalalady.co.kr/front/php/product.php?product_no=833&amp;main_cate_no=1&amp;display_group=3</URL>
+        </ITEM>
+        <ITEM>
+            <POSITION>3</POSITION>
+            <NAME>셔링</NAME>
+            <SUB>브이넥 셔링 가오리 원피스</SUB>
+	    	<IMAGE>/remoteData/image/newArrivals/image3.jpg</IMAGE>
+	    	<WON>19,900</WON>
+	    	<URL>http://www.lalalady.co.kr/front/php/product.php?product_no=831&amp;main_cate_no=1&amp;display_group=3</URL>
+        </ITEM>
+        <ITEM>
+            <POSITION>4</POSITION>
+            <NAME>노스덕</NAME>
+            <SUB>노스덕 레인로퍼/4color</SUB>
+	    	<IMAGE>/remoteData/image/newArrivals/image4.jpg</IMAGE>
+	    	<WON>14,000</WON>
+	    	<URL>http://www.lalalady.co.kr/front/php/product.php?product_no=829&amp;main_cate_no=1&amp;display_group=3</URL>
+        </ITEM>
+        <ITEM>
+            <POSITION>5</POSITION>
+            <NAME>플레어</NAME>
+            <SUB>마크 크림 플레어 원피스/SBS 김지연아나 협찬/2color(빨/초)/적립금 3,000원 추가할인!</SUB>
+	    	<IMAGE>/remoteData/image/newArrivals/image5.jpg</IMAGE>
+	    	<WON>59,000</WON>
+	    	<URL>http://www.lalalady.co.kr/front/php/product.php?product_no=419&amp;main_cate_no=1&amp;display_group=3</URL>
+        </ITEM>
+        <ITEM>
+            <POSITION>6</POSITION>
+            <NAME>쉬폰</NAME>
+            <SUB>레오파드 쉬폰 블라우스/프릴 민소매 블라우스</SUB>
+	    	<IMAGE>/remoteData/image/newArrivals/image6.jpg</IMAGE>
+	    	<WON>28,000</WON>
+	    	<URL>http://www.lalalady.co.kr/front/php/product.php?product_no=828&amp;main_cate_no=1&amp;display_group=3</URL>
+        </ITEM>
+        <ITEM>
+            <POSITION>7</POSITION>
+            <NAME>스팽글장식</NAME>
+            <SUB>독수리 스팽글장식 가오리 원피스/셔링 원피스</SUB>
+	    	<IMAGE>/remoteData/image/newArrivals/image7.jpg</IMAGE>
+	    	<WON>21,000</WON>
+	    	<URL>http://www.lalalady.co.kr/front/php/product.php?product_no=825&amp;main_cate_no=1&amp;display_group=3</URL>
+        </ITEM>
+        <ITEM>
+            <POSITION>8</POSITION>
+            <NAME>뺏지</NAME>
+            <SUB>뺏지 야상 조끼/기본 야상 조끼/적립금 3,000원 추가할인!</SUB>
+	    	<IMAGE>/remoteData/image/newArrivals/image8.jpg</IMAGE>
+	    	<WON>55,000</WON>
+	    	<URL>http://www.lalalady.co.kr/front/php/product.php?product_no=824&amp;main_cate_no=1&amp;display_group=3</URL>
+        </ITEM>
+        <ITEM>
+            <POSITION>9</POSITION>
+            <NAME>스트라이프</NAME>
+            <SUB>dk**퓨어 스트라이프 원피스/셔츠원피스</SUB>
+	    	<IMAGE>/remoteData/image/newArrivals/image9.jpg</IMAGE>
+	    	<WON>49,000</WON>
+	    	<URL>http://www.lalalady.co.kr/front/php/product.php?product_no=820&amp;main_cate_no=1&amp;display_group=3</URL>
+        </ITEM>
+    </ITEMLIST>
+</DATA>
+
+
